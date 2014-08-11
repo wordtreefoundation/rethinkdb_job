@@ -4,7 +4,8 @@ A simple model that tracks job information in RethinkDB for api-scripts. Used in
 
 ## Usage
 
-```require 'rethinkdb_job'
+```ruby
+require 'rethinkdb_job'
 
 job = RethinkDBJob.new
 
@@ -15,6 +16,6 @@ job.set_timestamp(job_id, :job_start)
 
 Find a job:
 
-```
+```ruby
 job.find(job_id)
 ```
