@@ -11,7 +11,7 @@ describe RethinkDBJob do
     job = RethinkDBJob.new
     expect(job.database).to eq("test")
 
-    job = RethinkDBJob.new(nil, :db => "test2")
+    job = RethinkDBJob.new(:db => "test2")
     expect(job).to receive(:rql_db_string).with(any_args).and_call_original
     expect(job.database).to eq("test2")
   end

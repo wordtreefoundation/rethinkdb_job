@@ -1,6 +1,6 @@
 # RethinkDBJob
 
-A simple model that tracks job information in RethinkDB for api-scripts. Used in conjunction with beanstalkd (but not strictly required as a dependency).
+A simple model that tracks job information in RethinkDB for wordtreefoundation/api-scripts. Used in conjunction with beanstalkd (but not strictly required as a dependency).
 
 ## Usage
 

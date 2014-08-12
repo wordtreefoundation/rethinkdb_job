@@ -6,9 +6,9 @@ class RethinkDBJob
 
   include RethinkDBJob::Setup
 
-  def initialize(table="jobs", rdb_config={})
+  def initialize(rdb_config={})
     @rdb_config = rdb_config
-    @table = table
+    @table = @rdb_config.delete(:table) || "jobs"
     @done_setup = false
 
     @r = RethinkDB::RQL.new
