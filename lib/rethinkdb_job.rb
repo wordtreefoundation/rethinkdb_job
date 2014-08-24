@@ -42,4 +42,16 @@ class RethinkDBJob
       raise "expected column to be one of #{timestamp_columns.inspect} (#{column.inspect})"
     end
   end
+
+  def logdir
+    @rdb_config[:logdir]
+  end
+  
+  def logfile(job_id)
+    File.join(logdir, "job_#{job_id}.log")
+  end
+
+  def tail(job_id, lines=10)
+    `tail -#{Integer(lines).to_s} #{logfile(job_id)} 2>&1`
+  end
 end

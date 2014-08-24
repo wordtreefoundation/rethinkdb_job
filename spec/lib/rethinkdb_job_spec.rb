@@ -21,6 +21,33 @@ describe RethinkDBJob do
     expect(job.done_setup?).to eq(false)
   end
 
+  it "can configure the logdir" do
+    job = RethinkDBJob.new(:logdir => "test")
+    expect(job.logdir).to eq("test")
+  end
+
+  describe "#logfile" do
+    it "joins" do
+      job = RethinkDBJob.new(:logdir => "/test")
+      expect(job.logfile("xyz")).to eq("/test/job_xyz.log")
+    end
+    
+    it "converts integer job IDs to string" do
+      job = RethinkDBJob.new(:logdir => "/test")
+      expect(job.logfile(123)).to eq("/test/job_123.log")
+    end
+  end
+
+  describe "#tail" do
+    it "tails last 10 lines of a file" do
+      job = RethinkDBJob.new(:logdir => "/tmp")
+      File.open("/tmp/job_tail.log", "w") do |f|
+        f.write("1\n2\n3\n")
+      end
+      expect(job.tail("tail")).to eq("1\n2\n3\n")
+    end
+  end
+
   context "given a RethinkDBJob instance" do
     let(:job) { RethinkDBJob.new }
 
