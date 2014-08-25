@@ -20,7 +20,7 @@ class RethinkDBJob
 
   def create
     ensure_setup
-    result = @r.table(@table).insert({}, :return_vals => true).run(@rdb)
+    result = @r.table(@table).insert({}, :return_vals => true).run(rdb)
     if result["inserted"] == 1
       result["new_val"]["id"]
     else
@@ -29,14 +29,14 @@ class RethinkDBJob
   end
 
   def find(job_id)
-    @r.table(@table).get(job_id).run(@rdb)
+    @r.table(@table).get(job_id).run(rdb)
   end
 
   TIMESTAMP_COLUMNS = [:job_start, :job_finish]
   def set_timestamp(job_id, column, time=Time.now)
     ensure_setup
     if TIMESTAMP_COLUMNS.include?(column.to_sym)
-      @r.table(@table).get(job_id).update(column => time).run(@rdb)
+      @r.table(@table).get(job_id).update(column => time).run(rdb)
       time
     else
       raise "expected column to be one of #{timestamp_columns.inspect} (#{column.inspect})"
@@ -44,6 +44,7 @@ class RethinkDBJob
   end
 
   def logdir
+    raise "RethinkDBJob :logdir not set" if @rdb_config[:logdir].nil?
     @rdb_config[:logdir]
   end
   
