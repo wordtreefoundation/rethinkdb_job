@@ -20,7 +20,7 @@ class RethinkDBJob
 
   def create
     ensure_setup
-    result = @r.table(@table).insert({}, :return_vals => true).run(rdb)
+    result = @r.table(@table).insert({}, :return_changes => true).run(rdb)
     if result["inserted"] == 1
       result["new_val"]["id"]
     else
