@@ -22,7 +22,8 @@ class RethinkDBJob
     ensure_setup
     result = @r.table(@table).insert({}, :return_changes => true).run(rdb)
     if result["inserted"] == 1
-      result["new_val"]["id"]
+      change = result["changes"].first
+      change["new_val"]["id"]
     else
       raise "Unable to create new job record"
     end

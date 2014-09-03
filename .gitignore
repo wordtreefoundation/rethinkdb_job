@@ -9,6 +9,7 @@ Gemfile.lock
 *.rbc
 .bundle
 .config
+.DS_Store
 coverage
 InstalledFiles
 lib/bundler/man

@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
   s.rubyforge_project = '[none]'
 
-  s.add_dependency 'rethinkdb', '~>1.13.0'
+  s.add_dependency 'rethinkdb', '~>1.14.0'
 
   s.add_development_dependency 'debugger'
   s.add_development_dependency 'guard'
